@@ -127,6 +127,20 @@ li:hover {
 	gap: 30px;
 	padding: 20px 0px 50px 0px;
 	cursor: pointer;
+	color: #1D6154;
+	
+}
+#filters li {
+	padding: 10px 20px;
+	border: solid 1px #1D6154;
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700;
+	border-radius: 25px;
+}
+#filters li:hover {
+	background-color: #1D6154 ;
+	color: white;
 }
 
 #portfolio h2 {
