@@ -22,11 +22,3 @@ fetch('http://localhost:5678/api/works')
 .then(response => response.json())
 .then(json => {createElements(json)});
 
-
-
-
-function newFunction(div) {
-    div += '</figure>';
-    return div;
-}
-
