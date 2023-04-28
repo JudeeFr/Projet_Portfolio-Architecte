@@ -121,6 +121,13 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+#filters {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	padding: 20px 0px 50px 0px;
+	cursor: pointer;
+}
 
 #portfolio h2 {
 	text-align: center;
