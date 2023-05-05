@@ -18,12 +18,19 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<a href="#"><li>logout</li></a>
+			<li class="logout">logout</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
 <main>
+	<aside>
+		<div class="header-bar">
+				<i class="four fa-sharp fa-solid fa-pen-to-square edit"></i>
+				<p class="edit">Mode édition</p>
+				<p class="publish">publier les changements</p>			
+		</div>
+	</aside>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -40,7 +47,7 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<i class="three fa-regular fa-pen-to-square edit2"></i>
-		<button class="edit2"><a href="#"role="button">modifier</a></button>
+		<button class="edit2 "><a href="#"role="button">modifier</a></button>
 		<ul id="filters">
 			<li id="Tout">Tout</li>
 			<li id="Objets" data-id="1">Objets</li>
@@ -62,11 +69,15 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-	<aside>
-		<div class="header-bar">
-				<i class="four fa-sharp fa-solid fa-pen-to-square edit"></i>
-				<p class="edit">Mode édition</p>
-				<p class="publish">publier les changements</p>			
+	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" >
+		<div class="modal-wrapper">
+			<i class="fa-solid fa-x close-modal"></i>
+			<h3>Galerie photo</h3>	
+			<div class="gallery-container">
+				<div class="modal-gallery"></div>
+			</div>				
+			<input type="submit" value="Ajouter une photo">		
+			<p>Supprimer la galerie</p>			
 		</div>
 	</aside>
 </main>

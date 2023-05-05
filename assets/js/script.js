@@ -8,6 +8,7 @@ const buttonAll = document.getElementById("Tout");
 
 let works = [];
 
+// Filtres 
 function portfolioFilter(works) {
     let gallery = document.querySelector('.gallery');
         gallery.innerHTML = '';
@@ -26,6 +27,7 @@ function portfolioFilter(works) {
             figure.appendChild(figcaption);            
             }
 };
+// Affichage projets 
 
 fetch('http://localhost:5678/api/works')
 .then(function (response) {
@@ -51,9 +53,10 @@ fetch('http://localhost:5678/api/works')
         figcaption.innerHTML = work.title;
         figure.appendChild(figcaption);
 
-        gallery.appendChild(figure);    
+        gallery.appendChild(figure);
+           
     };
-    
+    // Boutons filtres 
     buttonObjets.addEventListener("click", function(){  
         const Objets = works.filter((works) => {return works.categoryId === 1;} );  
         portfolioFilter(Objets);
@@ -71,5 +74,4 @@ fetch('http://localhost:5678/api/works')
         portfolioFilter(All);
     })
 })
-
 

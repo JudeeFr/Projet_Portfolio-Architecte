@@ -181,6 +181,11 @@ input:focus {
 	padding: 10px 40px;
 	border: none;
 }
+#errorInformation {
+	text-align: center;
+	padding: 30px;
+	color: red;
+}
 label {
 	margin: 20px 0 0 0;
 	font-family: 'Work Sans';
