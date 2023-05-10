@@ -343,7 +343,6 @@ button {
 .modal-gallery {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
 	justify-content: space-between;
 	gap:5px;
 	
@@ -354,6 +353,15 @@ button {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
+	object-fit: cover;
+	position: relative;
+	
+}
+
+.modal-gallery figure {	
+	display: inline-block;
+	position: relative;
+	padding-bottom: 20px;
 }
 .btn-edit {
 	font-family: 'Work Sans';
@@ -362,20 +370,26 @@ button {
 	border: 0px solid transparent;
 	background: white;
 	cursor: pointer;
+	position: absolute;
+	left: -2px;
+	
 }
-.modal-gallery figure {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-}
-
 .trash-can-button {
 	cursor: pointer;
-	display: inline-block;
-	top: 0;
+	position: absolute;
+	color : white;
+	background-color: black;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 10px;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
 }
-
+.delete-gallery {
+	cursor: pointer;
+}
 /* Modale formulaire ajout image */
 
 .modal-form {
@@ -411,10 +425,12 @@ button {
 	flex-wrap: wrap;
 	gap:5px;
 	margin-top: 20px;
+	
 }
 .modal-form form label {
 	text-align: left;
 	margin-top: 10px;
+	
 }
 .modal-form form input, select {
 	border: none;
@@ -422,7 +438,8 @@ button {
 	padding-top: 10px ;
 	margin: 5px 0;
 	background: white;
-	align-items: center;
+	
+	
 }
 .background {
 	width: 420px;
@@ -438,7 +455,7 @@ button {
 	padding-bottom: 20px;
 	font-size: 12px;
 }
-.add-photo {
+.upload-photo {
 	background: #CBD6DC;
 	color: #306685;
 	font-family: 'Work Sans';

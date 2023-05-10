@@ -11,16 +11,10 @@ let worksDual;
 
 function duplicateGallery() {
     return fetch("http://localhost:5678/api/works")
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            else {
-                throw new Error('Il y a une erreur');
-            }
+        .then((r)=> {if (r.ok) {return r.json()}
+            else {throw new Error('Il y a une erreur')}
         })
-        .then(function (works) {
-            worksDual = works;
+        .then((works)=> {worksDual = works;
             return worksDual;
         });
 }
@@ -46,9 +40,9 @@ function modal1(works) {
         
         figure.setAttribute("data-id", work.id);
 
-        /* bouton edit sous image */
+        /* boutons éditer et supprimer */
         let editButton = document.createElement("button");
-        editButton.innerHTML = "Editer";
+        editButton.innerHTML = "éditer";
         editButton.classList.add("btn-edit");
 
         let trashButton = document.createElement("i");
@@ -58,19 +52,18 @@ function modal1(works) {
         figure.appendChild(editButton);
         figure.appendChild(trashButton);
 
-        /* supprimer ou enregistrer l'image*/
         editButton.addEventListener("click", function () {
             editMode = !editMode;
             if (editMode) {
-                editButton.innerHTML = "Enregistrer";
+                editButton.innerHTML = "enregistrer";
                 trashButton.style.display = "block";
             }
             else {
-                editButton.innerHTML = "Editer";
+                editButton.innerHTML = "éditer";
                 trashButton.style.display = "none";
             }
         })
-        /* Supprimer l'image */
+        
         trashButton.addEventListener("click", function () {
             let id = this.parentNode.getAttribute("data-id");
             fetch(`http://localhost:5678/api/works/${id}`, {
@@ -132,6 +125,7 @@ function deleteGallery() {
             headers: {
                 "Content-Type": "application/json",
             },
+            
         })
         .then(function (r) {
             if (r.ok) {deleteGallery()}
@@ -170,7 +164,7 @@ const returnModal = function(e) {
 }
 addPhotoBtn.addEventListener('click', addPhoto);   
 
-/* Afficher categories*/
+/* Afficher categories dans formulaire*/
 async function categories() {
     const response = await fetch("http://localhost:5678/api/categories");
     const categories = await response.json();
@@ -187,9 +181,10 @@ categories();
 // bouton Ajouter une photo 
 const background = document.querySelector(".background");
 const img = document.createElement("img");
-const errorMessage = document.querySelector("#error-message")
+const errorMessage = document.querySelector("#error-message");
+const uploadPhoto = document.querySelector(".upload-photo");
 
-document.querySelector(".add-photo").addEventListener("click", function () {
+uploadPhoto.addEventListener("click", function () {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/jpg, image/png,image/jPEG";
@@ -221,19 +216,12 @@ document.querySelector(".add-photo").addEventListener("click", function () {
 // Ajout nouvelle image sans recharger la page
 function newImageShow() {
     return fetch("http://localhost:5678/api/works")
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            else {
-                throw new Error('Il y a une erreur');
-            }
+        .then((r)=> {if (r.ok) {return response.json()}
+            else {throw new Error('Il y a une erreur')}
         })
-        .then(function (works) {
-            return works;
-        });
+        .then(function (works) {return works});
 }
-// Envoie de l'image au serveur
+// Btn valider - Envoie de l'image au serveur
 const submitButton = document.querySelector("#submit-button");
 const titleInput = document.querySelector("#title");
 const categorySelect = document.querySelector("#category");
@@ -266,8 +254,7 @@ submitButton.addEventListener("click", function (e) {
         },
         body: formData
     })
-    .then( (r) => {
-        if (r.ok) {return r.json();}
+    .then( (r) => {if (r.ok) {return r.json()}
         else {console.error("Il y a une erreur");}
     })
     /* ajouter la nouvelle image dans la modale et dans la galerie */    
