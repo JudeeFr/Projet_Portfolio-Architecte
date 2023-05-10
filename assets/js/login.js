@@ -27,7 +27,14 @@ submit.addEventListener("click", (e) => {
                 error.innerHTML = "Erreur dans l'identifiant ou le mot de passe";
             }
         })
-        .then(() => window.location.replace("./admin.html"))
+        
+        .then(function (userInformation) {              
+            if (userInformation) {
+                window.sessionStorage.setItem("userInformation", JSON.stringify(userInformation));
+                window.sessionStorage.setItem("token", userInformation.token);
+                window.location.replace("./admin.html");
+            }
+        })
         .catch(error => console.error(error))
     }
         
