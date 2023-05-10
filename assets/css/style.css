@@ -2,7 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+* {
+	box-sizing: border-box;
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,7 +24,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	box-sizing: border-box;
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -353,6 +355,26 @@ button {
 	flex-direction: column;
 	flex-wrap: wrap;
 }
+.btn-edit {
+	font-family: 'Work Sans';
+	font-size: 12px;
+	font-weight: 400;
+	border: 0px solid transparent;
+	background: white;
+	cursor: pointer;
+}
+.modal-gallery figure {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.trash-can-button {
+	cursor: pointer;
+	display: inline-block;
+	top: 0;
+}
 
 /* Modale formulaire ajout image */
 
@@ -376,6 +398,11 @@ button {
 	margin: 30px 80px 10px 80px;
 	border-bottom: rgb(205, 203, 203) 1px solid;
 	padding-bottom: 50px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap:5px;
+	margin-top: 20px;
 	
 }
 .modal-form form {

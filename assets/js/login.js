@@ -20,15 +20,15 @@ submit.addEventListener("click", (e) => {
             },
             body: JSON.stringify({email: email, password: password}),
         })
-        .then(function (r) {     
-            if (r.ok===true) {
+        .then( (r) => {    
+            if (r.ok) {
                 return r.json();
             } else {
                 error.innerHTML = "Erreur dans l'identifiant ou le mot de passe";
             }
         })
         .then(() => window.location.replace("./admin.html"))
-        .catch(error => console.error(error));
+        .catch(error => console.error(error))
     }
         
 });

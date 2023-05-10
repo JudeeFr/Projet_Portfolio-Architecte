@@ -6,8 +6,6 @@ const buttonAppartements = document.getElementById("Appartements");
 const buttonHR = document.getElementById("HR");
 const buttonAll = document.getElementById("Tout");
 
-let works = [];
-
 // Filtres 
 function portfolioFilter(works) {
     let gallery = document.querySelector('.gallery');
@@ -30,16 +28,15 @@ function portfolioFilter(works) {
 // Affichage projets 
 
 fetch('http://localhost:5678/api/works')
-.then(function (response) {
-    if (response.ok) {
-        return response.json();
+.then(function (r) {
+    if (r.ok) {
+        return r.json();
     }
     else {
         throw new Error('Erreur réponse de l\'API');
     }
 })
-.then(function (response) {
-    works = response;
+.then(function (works) {
     for (let i = 0; i < works.length; i++) {
         let work = works[i];
         let figure = document.createElement("figure");
