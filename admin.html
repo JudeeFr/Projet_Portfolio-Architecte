@@ -35,7 +35,7 @@
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 			<i class="first fa-regular fa-pen-to-square edit1"></i>
-			<button class="edit1"><a href="#" role="button">modifier</a></button>
+			<button id="edit1" class="edit1 js-modal"><a href="modal1" role="button">modifier</a></button>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -47,7 +47,7 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<i class="three fa-regular fa-pen-to-square edit2"></i>
-		<button class="edit2 "><a href="#"role="button">modifier</a></button>
+		<button class="edit2 js-modal"><a href="modal1"role="button">modifier</a></button>
 		<ul id="filters">
 			<li id="Tout">Tout</li>
 			<li id="Objets" data-id="1">Objets</li>
@@ -69,16 +69,46 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
-	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" >
-		<div class="modal-wrapper">
-			<i class="fa-solid fa-x close-modal"></i>
-			<h3>Galerie photo</h3>	
-			<div class="gallery-container">
-				<div class="modal-gallery"></div>
-			</div>				
-			<input type="submit" value="Ajouter une photo">		
-			<p>Supprimer la galerie</p>			
+	<aside id="modal1" class="modal" aria-modal="false" aria-hidden="true" role="dialog" style="display: none" >
+		
+		<div class="modal-wrapper">			
+			<div class="container1">
+				<i class="fa-solid fa-x close-modal"></i>
+				<h3>Galerie photo</h3>	
+				<div class="gallery-container">
+					<div class="modal-gallery"></div>
+				</div>				
+				<input type="submit" value="Ajouter une photo" class="add-photo-btn">		
+				<p class="delete-gallery">Supprimer la galerie</p>	
+			</div>		
 		</div>
+
+		<div class="modal-form" style="display: none">
+			<div class="container2" >
+				<i class="fa-solid fa-arrow-left-long return-btn"></i>
+				<i class="fa-solid fa-x close-modal"></i>
+				<h3>Ajout photo</h3>
+				<div class="form-container">	
+					<div class="background">
+						<i class="fa-sharp fa-solid fa-image"></i>
+						<div class="add-photo">+ Ajouter photo</div>
+						<p class="jpg">jpg, png : 4 mo max</p>
+					</div>
+					<form id="form">
+						<label for="titre">Titre</label>
+						<input type="text" id="title">
+						<label for="categorie">Catégorie</label>
+						<select id="category" name="category">
+						<option value="" disabled selected></option>
+						</select>
+					</form>		
+				</div>	
+				<input type="submit" id="submit-button" value="Valider">
+				<p id="error-message"></p>
+			</div>	
+		</div>
+		
+
 	</aside>
 </main>
 
