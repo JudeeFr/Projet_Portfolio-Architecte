@@ -15,7 +15,7 @@ submit.addEventListener("click", (e) => {
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: {
-                accept: "application/json",
+                "Accept": "application/json",
                 "Content-type": "application/json",
             },
             body: JSON.stringify({email: email, password: password}),

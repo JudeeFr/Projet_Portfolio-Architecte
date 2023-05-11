@@ -18,10 +18,48 @@ function duplicateGallery() {
             return worksDual;
         });
 }
+
+// boutons open & close modal
+const closeBtn = document.querySelector('.close-modal');
+let modal = null;
+
+const openModal = function(e) {
+    e.preventDefault();
+    const target = document.getElementById("modal1");
+    target.style.display = null;
+    target.setAttribute('aria-hidden', false);
+    target.setAttribute('aria-modal', true);
+    modal = target;
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-stop-modal').addEventListener('click', stopPropagation);
+    modal.querySelector('.js-stop-modal2').addEventListener('click', stopPropagation);
+    closeBtn.addEventListener('click', closeModal)
+}
+const closeModal = function(e) {
+    e.preventDefault();
+    if (modal === null) return
+    modal.style.display = "none";
+    modal.setAttribute('aria-hidden', true);
+    modal.setAttribute('aria-modal', false);
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js-stop-modal').removeEventListener('click', stopPropagation);
+    modal.querySelector('.js-stop-modal2').removeEventListener('click', stopPropagation);
+    closeBtn.removeEventListener('click', closeModal);
+    modal = null;
+}
+const stopPropagation = function (e) {
+    e.stopPropagation()
+};
+
+document.querySelectorAll('.js-modal').forEach(a => {
+    a.addEventListener('click', openModal);   
+})
+
 // Afficher la gallerie dans la modale
-const modal = document.getElementById("modal1");
 const modalGallery = document.querySelector(".modal-gallery");
 let editMode = false;
+let token = window.sessionStorage.getItem("token") || "";
+const modale = document.getElementById("#modal1");
 
 function modal1(works) {
     /* afficher les images dans la modale */
@@ -49,27 +87,36 @@ function modal1(works) {
         trashButton.classList.add("fa-solid", "fa-trash-can", "trash-can-button");
         trashButton.style.display = "none";
 
+        let dragButton = document.createElement("i");
+        dragButton.classList.add("fa-solid", "fa-up-down-left-right");
+        dragButton.style.display = "none";
+
         figure.appendChild(editButton);
         figure.appendChild(trashButton);
+        figure.appendChild(dragButton);
 
         editButton.addEventListener("click", function () {
             editMode = !editMode;
             if (editMode) {
                 editButton.innerHTML = "enregistrer";
                 trashButton.style.display = "block";
+                dragButton.style.display = "block";
             }
             else {
                 editButton.innerHTML = "éditer";
                 trashButton.style.display = "none";
+                dragButton.style.display = "none";
             }
         })
         
         trashButton.addEventListener("click", function () {
             let id = this.parentNode.getAttribute("data-id");
+            
             fetch(`http://localhost:5678/api/works/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },  
             })
             .then(function (r) {
@@ -78,7 +125,7 @@ function modal1(works) {
                     figure.innerHTML = "";
                     /* supprimer l'image dans la modale et la gallerie */
                     duplicateGallery().then(function (works) {                       
-                        modal.innerHTML = "";
+                        modale.innerHTML = "";
                         modalGallery.innerHTML = "";
                         modal1(works);  
                     });
@@ -90,26 +137,6 @@ function modal1(works) {
 } 
 duplicateGallery().then((works)=>{modal1(works)});
 
-// boutons open & close modal
-const closeBtn = document.querySelector('.close-modal');
-
-const openModal = function(e) {
-    e.preventDefault();
-    modal.style.display = null;
-    modal.setAttribute('aria-hidden', false);
-    modal.setAttribute('aria-modal', true);
-    closeBtn.addEventListener('click', closeModal)
-}
-const closeModal = function(e) {
-    e.preventDefault();
-    modal.style.display = "none";
-    modal.setAttribute('aria-hidden', true);
-    modal.setAttribute('aria-modal', false);
-    closeBtn.removeEventListener('click', closeModal)
-}
-document.querySelectorAll('.js-modal').forEach(a => {
-    a.addEventListener('click', openModal);   
-})
 
 /* boutton supprimer la gallerie */
 const deleteGalleryButton = document.querySelector(".delete-gallery");
@@ -119,11 +146,11 @@ function deleteGallery() {
     const figure = document.querySelectorAll(".modal-gallery");
     figure.forEach(figure => {
         let id = figure.getAttribute("data-id");
-
         fetch(`http://localhost:5678/api/works/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             
         })
@@ -137,7 +164,7 @@ function deleteGallery() {
     });
     /* supprimer la gallerie dans la modale et le portfolio */
     duplicateGallery().then(function (works) {
-        modal.innerHTML = "";
+        modale.innerHTML = "";
         modalGallery.innerHTML = "";
         modal1(works);
     });
@@ -183,6 +210,7 @@ const background = document.querySelector(".background");
 const img = document.createElement("img");
 const errorMessage = document.querySelector("#error-message");
 const uploadPhoto = document.querySelector(".upload-photo");
+let image;
 
 uploadPhoto.addEventListener("click", function () {
     const input = document.createElement("input");
@@ -225,7 +253,6 @@ function newImageShow() {
 const submitButton = document.querySelector("#submit-button");
 const titleInput = document.querySelector("#title");
 const categorySelect = document.querySelector("#category");
-let image;
 
 submitButton.addEventListener("click", function (e) {
     e.preventDefault();
@@ -251,6 +278,7 @@ submitButton.addEventListener("click", function (e) {
         headers: {
             "Accept": "application/json",
             "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
         },
         body: formData
     })
@@ -260,7 +288,7 @@ submitButton.addEventListener("click", function (e) {
     /* ajouter la nouvelle image dans la modale et dans la galerie */    
     .then (function(data){console.log(data);
         // newImageShow().then(function (works) {
-        //     modal.innerHTML = "";
+        //     modale.innerHTML = "";
         //     modalGallery.innerHTML = "";
         //     modal1(works);
         //    });
