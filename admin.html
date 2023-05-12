@@ -70,44 +70,46 @@
 		</form>
 	</section>
 	<aside id="modal1" class="modal" aria-modal="false" aria-hidden="true" role="dialog" style="display: none" >
-		
-		<div class="modal-wrapper js-stop-modal">			
-			<div class="container1">
-				<i class="fa-solid fa-x close-modal"></i>
-				<h3>Galerie photo</h3>	
-				<div class="gallery-container">
-					<div class="modal-gallery"></div>
-				</div>				
-				<input type="submit" value="Ajouter une photo" class="add-photo-btn">		
-				<p class="delete-gallery">Supprimer la galerie</p>	
-			</div>		
-		</div>
+		<div class="js-stop-modal">
+			<div class="modal-wrapper ">			
+				<div class="container1">
+					<i class="fa-solid fa-x close-modal"></i>
+					<h3>Galerie photo</h3>	
+					<div class="gallery-container">
+						<div class="modal-gallery"></div>
+					</div>				
+					<input type="submit" value="Ajouter une photo" class="add-photo-btn">		
+					<p class="delete-gallery">Supprimer la galerie</p>	
+				</div>		
+			</div>
 
-		<div class="modal-form js-stop-modal2" style="display: none">
-			<div class="container2" >
-				<i class="fa-solid fa-arrow-left-long return-btn"></i>
-				<i class="fa-solid fa-x close-modal"></i>
-				<h3>Ajout photo</h3>
-				<div class="form-container">	
-					<div class="background">
-						<i class="fa-sharp fa-solid fa-image"></i>
-						<div class="upload-photo">+ Ajouter photo</div>
-						<p class="jpg">jpg, png : 4 mo max</p>
-					</div>
-					<form id="form">
-						<label for="titre">Titre</label>
-						<input type="text" id="title">
-						<label for="categorie">Catégorie</label>
-						<select id="category" name="category">
-						<option value="" disabled selected></option>
-						</select>
-					</form>		
+			<div class="modal-form " style="display: none">
+				<div class="container2" >
+					<i class="fa-solid fa-arrow-left-long return-btn"></i>
+					<i class="fa-solid fa-x close-modal"></i>
+					<h3>Ajout photo</h3>
+					<div class="form-container">
+						<input type="file" id="input" style="display: none">	
+						<div class="background">
+							<i class="fa-sharp fa-solid fa-image"></i>
+							<div class="upload-photo">+ Ajouter photo</div>
+							<p class="jpg">jpg, png : 4 mo max</p>
+						</div>
+						<form id="form">
+							<label for="titre">Titre</label>
+							<input type="text" id="title">
+							<label for="categorie">Catégorie</label>
+							<select id="category" name="category">
+							<option value="" disabled selected></option>
+							</select>
+						</form>		
+					</div>	
+					<input type="submit" id="submit-button" value="Valider">
+					<p id="error-message"></p>
+					<p id="valid-message"></p>
 				</div>	
-				<input type="submit" id="submit-button" value="Valider">
-				<p id="error-message"></p>
-			</div>	
+			</div>
 		</div>
-		
 
 	</aside>
 </main>
@@ -119,7 +121,7 @@
 		</ul>
 	</nav>
 </footer>
-<script src="./assets/js/script.js"></script>
+<!-- <script src="./assets/js/script.js"></script> -->
 <script src="./assets/js/admin.js"></script>
 </body>
 </html>

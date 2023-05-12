@@ -342,10 +342,8 @@ button {
 }
 .modal-gallery {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	gap:5px;
-	
+	flex-wrap: wrap;	
+	gap:5px;	
 }
 .modal-gallery img {
 	width: 76px;
@@ -362,6 +360,7 @@ button {
 	display: inline-block;
 	position: relative;
 	padding-bottom: 20px;
+	
 }
 .btn-edit {
 	font-family: 'Work Sans';
@@ -510,6 +509,11 @@ button {
 }
 #error-message {
 	color: red;
+	font-weight: 700;
+}
+#valid-message {
+	color: #1D6154;
+	font-weight: 700;
 }
 /* Animations  */
 .container1 {
