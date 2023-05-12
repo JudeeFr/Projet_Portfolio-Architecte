@@ -35,7 +35,7 @@
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 			<i class="first fa-regular fa-pen-to-square edit1"></i>
-			<button id="edit1" class="edit1 js-modal"><a href="modal1" role="button">modifier</a></button>
+			<button id="edit1" class="edit1 js-modal"><a href="modal1" role="button" title="Modifier les Projets">modifier</a></button>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -47,7 +47,7 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<i class="three fa-regular fa-pen-to-square edit2"></i>
-		<button class="edit2 js-modal"><a href="modal1"role="button">modifier</a></button>
+		<button class="edit2 js-modal"><a href="modal1"role="button" title="Modifier les Projets">modifier</a></button>
 		<ul id="filters">
 			<li id="Tout">Tout</li>
 			<li id="Objets" data-id="1">Objets</li>
@@ -85,16 +85,17 @@
 
 			<div class="modal-form " style="display: none">
 				<div class="container2" >
-					<i class="fa-solid fa-arrow-left-long return-btn"></i>
+					<a href="#" title="Retour Gallerie"><i class="fa-solid fa-arrow-left-long return-btn"></i></a>
 					<i class="fa-solid fa-x close-modal"></i>
 					<h3>Ajout photo</h3>
 					<div class="form-container">
 						<input type="file" id="input" style="display: none">	
 						<div class="background">
 							<i class="fa-sharp fa-solid fa-image"></i>
-							<div class="upload-photo">+ Ajouter photo</div>
+							<div class="upload-photo"><a href="#" title="Télécharger une photo de votre ordinateur">+ Ajouter photo</a></div>
 							<p class="jpg">jpg, png : 4 mo max</p>
 						</div>
+						<div class="background-img" style="display: none"></div>
 						<form id="form">
 							<label for="titre">Titre</label>
 							<input type="text" id="title">

@@ -187,6 +187,12 @@ duplicateWorks().then((works) => {
 const deleteGalleryBtn = document.querySelector('.delete-gallery');
 const id = document.querySelector('.container1').getAttribute('data-id');
 
+function confirmer() {
+	const dialog = confirm('Voulez-vous vraiment supprimer la gallerie ?');
+	if (dialog) {
+		deleteGallery();
+	}
+}
 function deleteGallery() {
 	const figure = document.querySelectorAll('.modal-gallery');
 	figure.forEach((figure) => {
@@ -200,7 +206,7 @@ function deleteGallery() {
 		})
 			.then(function (r) {
 				if (r.ok) {
-					deleteGallery();
+					confirmer();
 				} else {
 					console.error('Il y a une erreur');
 				}
@@ -217,7 +223,9 @@ function deleteGallery() {
 		duplicatePortfolio(works);
 	});
 }
-deleteGalleryBtn.addEventListener('click', deleteGallery);
+deleteGalleryBtn.addEventListener('click', function () {
+	deleteGallery();
+});
 
 // Affichage formulaire ajout photo
 const addPhotoBtn = document.querySelector('.add-photo-btn');
@@ -254,10 +262,10 @@ async function categories() {
 categories();
 
 // bouton Ajouter une photo
-const background = document.querySelector('.background');
+const bcg = document.querySelector('.background');
+const bcgImg = document.querySelector('.background-img');
 const img = document.createElement('img');
 const errorMessage = document.querySelector('#error-message');
-const validMessage = document.querySelector('#valid-message');
 const uploadPhoto = document.querySelector('.upload-photo');
 let image;
 
@@ -282,13 +290,14 @@ uploadPhoto.addEventListener('click', function () {
 			return;
 		}
 		/* Remplacer background par image chargée */
-		background.innerHTML = '';
+		bcg.style.display = 'none';
+		bcgImg.style.display = null;
 		const reader = new FileReader();
 		reader.readAsDataURL(image);
 		reader.onload = () => {
 			img.src = reader.result;
 			img.style.width = '30%';
-			background.appendChild(img);
+			bcgImg.appendChild(img);
 		};
 	});
 });
@@ -354,7 +363,9 @@ submitButton.addEventListener('click', function (e) {
 		/* ajouter la nouvelle image dans la modale et dans la galerie */
 		.then(function (data) {
 			console.log(data);
-			validMessage.innerHTML = 'Photo ajoutée à la galerie';
+			alert('Photo ajoutée à la galerie');
+			bcg.style.display = null;
+			bcgImg.style.display = 'none';
 			duplicateWorks().then(function (works) {
 				modalGallery.innerHTML = '';
 				gallery.innerHTML = '';
