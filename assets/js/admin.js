@@ -5,7 +5,7 @@ logout.addEventListener('click', () => {
 	window.location.replace('index.html');
 });
 
-/* Dupliquer la galerie dans la modale */
+/* Dupliquer l'appel API de works sur la page admin */
 let worksDual;
 
 function duplicateWorks() {
@@ -23,32 +23,31 @@ function duplicateWorks() {
 		});
 }
 
-// dupliquer la galerie dans le portfolio page admin
+// dupliquer l'affichage de la galerie dans la page admin
 const gallery = document.querySelector('.gallery');
 const portfolio = document.getElementById('portfolio');
 
 function duplicatePortfolio(works) {
-	for (let i = 0; i < works.length; i++) {
-		let work = works[i];
+	works.forEach((work) => {
 		if (work && work.hasOwnProperty('title')) {
-			let figure = document.createElement('figure');
+			const figure = document.createElement('figure');
 
 			figure.setAttribute('data-id', work.id);
 			figure.setAttribute('data-user-id', work.userId);
 
-			let img = document.createElement('img');
+			const img = document.createElement('img');
 			img.src = work.imageUrl;
 			img.crossOrigin = 'anonymous';
 			figure.appendChild(img);
 
-			let figcaption = document.createElement('figcaption');
+			const figcaption = document.createElement('figcaption');
 			figcaption.innerHTML = work.title;
 			figure.appendChild(figcaption);
 			gallery.appendChild(figure);
 		}
-	}
+	});
 }
-// boutons open & close modal
+// boutons open & close de la modale
 const closeBtn = document.querySelectorAll('.close-modal');
 let modal = null;
 const jsModal = document.querySelector('.js-stop-modal');
@@ -93,88 +92,95 @@ let editMode = false;
 let token = window.sessionStorage.getItem('token') || '';
 const modale = document.getElementById('modal1');
 
+function trash() {
+	const figure = document.querySelector('.figure-image');
+	let id = figure.getAttribute('data-id');
+
+	fetch(`http://localhost:5678/api/works/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: null,
+	})
+		.then(function (r) {
+			if (r.status === 204) {
+				figure.remove();
+				figure.innerHTML = '';
+			} else {
+				console.error('Il y a une erreur');
+			}
+		})
+		/* supprimer l'image dans la modale et la gallerie */
+		.then(function (data) {
+			console.log(data);
+			duplicateWorks().then(function (works) {
+				modalGallery.innerHTML = '';
+				gallery.innerHTML = '';
+				showGalleryOnModal(works);
+				duplicatePortfolio(works);
+			});
+		})
+		.catch(function (error) {
+			console.error('Il y a une erreur:', error);
+		});
+}
+
+function editImage() {
+	let figure = document.querySelectorAll('.figure-image');
+	const editButton = document.createElement('div');
+	editButton.innerHTML = 'éditer';
+	editButton.classList.add('btn-edit');
+
+	const dragButton = document.createElement('i');
+	dragButton.classList.add('fa-solid', 'fa-up-down-left-right');
+	dragButton.style.display = 'none';
+
+	const trashButton = document.createElement('i');
+	trashButton.classList.add('fa-solid', 'fa-trash-can', 'trash-can-button');
+	trashButton.style.display = 'none';
+
+	function createBtn(figures) {
+		figures.forEach((figure) => {
+			figure.append(editButton, dragButton, trashButton);
+		});
+	}
+	createBtn(figure);
+
+	editButton.addEventListener('click', function () {
+		editMode = !editMode;
+		if (editMode) {
+			editButton.innerHTML = 'enregistrer';
+			dragButton.style.display = 'block';
+			trashButton.style.display = 'block';
+		} else {
+			editButton.innerHTML = 'éditer';
+			dragButton.style.display = 'none';
+			trashButton.style.display = 'none';
+		}
+	});
+
+	trashButton.addEventListener('click', function () {
+		trash();
+	});
+}
+
 function showGalleryOnModal(works) {
-	for (let i = 0; i < works.length; i++) {
-		let work = works[i];
+	works.forEach((work) => {
 		let img = document.createElement('img');
-		let galleryModal = document.createElement('div');
 		img.crossOrigin = 'anonymous';
 		img.src = work.imageUrl;
 		img.classList.add('img');
+
 		let figure = document.createElement('figure');
-		galleryModal.appendChild(figure);
-		figure.appendChild(img);
-		modalGallery.appendChild(galleryModal);
-		figure.classList.add('modal-gallery');
-
+		figure.classList.add('figure-image');
 		figure.setAttribute('data-id', work.id);
+		modalGallery.appendChild(figure);
 
-		/* boutons éditer et supprimer */
-		let editButton = document.createElement('button');
-		editButton.innerHTML = 'éditer';
-		editButton.classList.add('btn-edit');
-
-		let trashButton = document.createElement('i');
-		trashButton.classList.add('fa-solid', 'fa-trash-can', 'trash-can-button');
-		trashButton.style.display = 'none';
-
-		let dragButton = document.createElement('i');
-		dragButton.classList.add('fa-solid', 'fa-up-down-left-right');
-		dragButton.style.display = 'none';
-
-		figure.appendChild(editButton);
-		figure.appendChild(trashButton);
-		figure.appendChild(dragButton);
-
-		// éditer une image
-		editButton.addEventListener('click', function () {
-			editMode = !editMode;
-			if (editMode) {
-				editButton.innerHTML = 'enregistrer';
-				trashButton.style.display = 'block';
-				dragButton.style.display = 'block';
-			} else {
-				editButton.innerHTML = 'éditer';
-				trashButton.style.display = 'none';
-				dragButton.style.display = 'none';
-			}
-		});
-
-		// Supprimer une image
-		trashButton.addEventListener('click', function () {
-			let id = this.parentNode.getAttribute('data-id');
-
-			fetch(`http://localhost:5678/api/works/${id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: null,
-			})
-				.then(function (r) {
-					if (r.status === 204) {
-						figure.remove();
-						figure.innerHTML = '';
-					} else {
-						console.error('Il y a une erreur');
-					}
-				})
-				/* supprimer l'image dans la modale et la gallerie */
-				.then(function (data) {
-					console.log(data);
-					duplicateWorks().then(function (works) {
-						modalGallery.innerHTML = '';
-						gallery.innerHTML = '';
-						showGalleryOnModal(works);
-						duplicatePortfolio(works);
-					});
-				})
-				.catch(function (error) {
-					console.error('Il y a une erreur:', error);
-				});
-		});
-	}
+		figure.appendChild(img);
+		editImage();
+	});
 }
 
 /* afficher les images dans la modale et page admin */
@@ -183,18 +189,19 @@ duplicateWorks().then((works) => {
 	duplicatePortfolio(works);
 });
 
-/* boutton supprimer la gallerie */
+/* boutton supprimer la galerie */
 const deleteGalleryBtn = document.querySelector('.delete-gallery');
 const id = document.querySelector('.container1').getAttribute('data-id');
 
 function confirmer() {
 	const dialog = confirm('Voulez-vous vraiment supprimer la gallerie ?');
 	if (dialog) {
-		deleteGallery();
+		deleteAll();
 	}
 }
-function deleteGallery() {
-	const figure = document.querySelectorAll('.modal-gallery');
+
+function deleteAll() {
+	const figure = document.querySelectorAll('.figure-image');
 	figure.forEach((figure) => {
 		let id = figure.getAttribute('data-id');
 		fetch(`http://localhost:5678/api/works/${id}`, {
@@ -205,17 +212,17 @@ function deleteGallery() {
 			},
 		})
 			.then(function (r) {
-				if (r.ok) {
-					confirmer();
+				if (r.status === 204) {
+					deleteAll();
 				} else {
 					console.error('Il y a une erreur');
 				}
 			})
+
 			.catch(function (error) {
 				console.error('Il y a une erreur:', error);
 			});
 	});
-	/* supprimer la gallerie dans la modale et le portfolio */
 	duplicateWorks().then(function (works) {
 		modalGallery.innerHTML = '';
 		gallery.innerHTML = '';
@@ -223,11 +230,12 @@ function deleteGallery() {
 		duplicatePortfolio(works);
 	});
 }
+
 deleteGalleryBtn.addEventListener('click', function () {
-	deleteGallery();
+	confirmer();
 });
 
-// Affichage formulaire ajout photo
+// Affichage formulaire ajout photo dans la modale
 const addPhotoBtn = document.querySelector('.add-photo-btn');
 const modalWrapper = document.querySelector('.modal-wrapper');
 const modalForm = document.querySelector('.modal-form');
@@ -247,7 +255,7 @@ const returnModal = function (e) {
 };
 addPhotoBtn.addEventListener('click', addPhoto);
 
-/* Afficher categories dans formulaire*/
+/* Afficher les categories dans le formulaire*/
 async function categories() {
 	const response = await fetch('http://localhost:5678/api/categories');
 	const categories = await response.json();

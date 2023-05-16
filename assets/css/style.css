@@ -65,7 +65,6 @@ header {
 section {
 	margin: 50px 0
 }
-
 h1{
 	display: flex;
 	flex-direction: column;
@@ -74,14 +73,12 @@ h1{
 	font-weight: 800;
 	color: #B1663C
 }
-
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
-}
 
+}
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -97,14 +94,12 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 	cursor: pointer;
 }
-
 nav li:hover {
 	font-weight: 700;
 }
@@ -150,8 +145,7 @@ a, a:visited, a:hover, a:active {
 	gap: 30px;
 	padding: 20px 0px 50px 0px;
 	cursor: pointer;
-	color: #1D6154;
-	
+	color: #1D6154;	
 }
 #filters li {
 	padding: 10px 20px;
@@ -165,7 +159,6 @@ a, a:visited, a:hover, a:active {
 	background-color: #1D6154 ;
 	color: white;
 }
-
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -177,10 +170,8 @@ a, a:visited, a:hover, a:active {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
-
 }
 #contact {
 	width: 50%;
@@ -188,7 +179,6 @@ a, a:visited, a:hover, a:active {
 }
 #contact > * {
 	text-align: center;
-
 }
 #contact h2{
 	margin-bottom: 20px;
@@ -199,7 +189,6 @@ a, a:visited, a:hover, a:active {
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input {
 	height: 50px;
 	font-size: 1.2em;
@@ -213,7 +202,6 @@ a, a:visited, a:hover, a:active {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -252,7 +240,6 @@ footer nav ul {
 	position: relative;
 	left: 60px;
 }
-
 .edit2 {
 	background-color: #FFFEF8;
 	padding: 20px 5px;
@@ -283,9 +270,7 @@ button {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-
 }
-
 .publish {
 	width: 200px;
 	height: 30px;
@@ -302,7 +287,6 @@ button {
 }
 
 /* fenetre modale  */
-
 .modal {
 	position: fixed;
 	display: flex;
@@ -313,7 +297,6 @@ button {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.3);
-	
 }
 .modal-wrapper {
 	background-color: white;
@@ -323,10 +306,8 @@ button {
 	max-height: calc(100vh - 20px);
 	overflow: auto;
 	border-radius: 10px;
-	text-align: center;
-	
+	text-align: center;	
 }
-
 .modal-wrapper h3 {
 	padding: 10px;
 }
@@ -352,15 +333,12 @@ button {
 	flex-direction: column;
 	flex-wrap: wrap;
 	object-fit: cover;
-	position: relative;
-	
+	position: relative;	
 }
-
 .modal-gallery figure {	
 	display: inline-block;
 	position: relative;
-	padding-bottom: 20px;
-	
+	padding-bottom: 20px;	
 }
 .btn-edit {
 	font-family: 'Work Sans';
@@ -370,8 +348,7 @@ button {
 	background: white;
 	cursor: pointer;
 	position: absolute;
-	left: -2px;
-	
+	left: -2px;	
 }
 .trash-can-button {
 	cursor: pointer;
@@ -402,8 +379,8 @@ button {
 .delete-gallery {
 	cursor: pointer;
 }
-/* Modale formulaire ajout image */
 
+/* Modale formulaire ajout image */
 .modal-form {
 	background-color: white;
 	width: 700px ;
@@ -412,14 +389,11 @@ button {
 	max-height: calc(100vh - 20px);
 	overflow: auto;
 	border-radius: 10px;
-	text-align: center;
-	
+	text-align: center;	
 }
-
 .modal-form h3 {
 	padding: 10px;
 }
-
 .form-container {
 	margin: 30px 80px 10px 80px;
 	border-bottom: rgb(205, 203, 203) 1px solid;
@@ -428,30 +402,25 @@ button {
 	flex-direction: column;
 	flex-wrap: wrap;
 	gap:5px;
-	margin-top: 20px;
-	
+	margin-top: 20px;	
 }
 .modal-form form {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	gap:5px;
-	margin-top: 20px;
-	
+	margin-top: 20px;	
 }
 .modal-form form label {
 	text-align: left;
-	margin-top: 10px;
-	
+	margin-top: 10px;	
 }
 .modal-form form input, select {
 	border: none;
 	box-shadow: 2px 2px 2px 2px rgba(174, 173, 173, 0.3);
 	padding: 10px 5px;
 	margin: 5px 0;
-	background: white;
-	
-	
+	background: white;	
 }
 .modal-form form input:focus {
 	box-shadow: 5px 5px 5px 5px rgb(156, 154, 154);
@@ -486,28 +455,27 @@ button {
 	margin-bottom: 5px; 
 	cursor: pointer;	
 }
-
+.upload-photo a {
+	text-decoration: none;
+}
 .fa-image {
 	font-size : 60px;
 	color: rgb(183, 183, 183, 0.8);
-	margin: 15px;
-	
+	margin: 15px;	
 }
 .return-btn {
 	cursor: pointer;
 	position: relative;
 	top: -20px;
 	right: 300px;
-	font-size: 16px;
-	
+	font-size: 16px;	
 }
 .close-modal {
 	position: relative;
 	top: -20px;
 	left: 300px;
 	font-size: 16px;
-	cursor: pointer;
-	
+	cursor: pointer;	
 }
 #error-message {
 	color: red;
@@ -539,14 +507,4 @@ button {
         opacity: 1;
         transform: translateX(0);
     }
-}
-.info {
-	position: absolute;
-	top: 0;
-	left: 0;
-	background: #222;
-	padding: 3px 10px;
-	font-size: 0.815em;
-	color: white;
-	border-radius: 3px;
 }
