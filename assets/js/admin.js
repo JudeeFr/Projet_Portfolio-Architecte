@@ -1,7 +1,9 @@
 // bouton Logout
 const logout = document.querySelector('.logout');
+let token = window.sessionStorage.getItem('token') || '';
 
 logout.addEventListener('click', () => {
+	window.sessionStorage.removeItem('token', token);
 	window.location.replace('index.html');
 });
 
@@ -89,7 +91,6 @@ document.querySelectorAll('.js-modal').forEach((a) => {
 // Afficher la gallerie dans la modale
 const modalGallery = document.querySelector('.modal-gallery');
 let editMode = false;
-let token = window.sessionStorage.getItem('token') || '';
 const modale = document.getElementById('modal1');
 
 function trash() {
