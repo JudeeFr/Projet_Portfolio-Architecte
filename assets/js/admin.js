@@ -93,9 +93,9 @@ const modalGallery = document.querySelector('.modal-gallery');
 let editMode = false;
 const modale = document.getElementById('modal1');
 
-function trash() {
+function trash(event) {
 	const figure = document.querySelector('.figure-image');
-	let id = figure.getAttribute('data-id');
+	let id = event.target.parentElement.getAttribute('data-id');
 
 	fetch(`http://localhost:5678/api/works/${id}`, {
 		method: 'DELETE',
@@ -162,8 +162,8 @@ function editImage() {
 		}
 	});
 
-	trashButton.addEventListener('click', function () {
-		trash();
+	trashButton.addEventListener('click', function (event) {
+		trash(event);
 	});
 }
 
@@ -311,21 +311,6 @@ uploadPhoto.addEventListener('click', function () {
 	});
 });
 
-// Ajout nouvelle image sans recharger la page
-function newImageShow() {
-	return fetch('http://localhost:5678/api/works')
-		.then((r) => {
-			if (r.ok) {
-				return r.json();
-			} else {
-				throw new Error('Il y a une erreur');
-			}
-		})
-		.then(function (works) {
-			return works;
-		});
-}
-
 // Btn valider - Envoie de l'image au serveur
 const submitButton = document.querySelector('#submit-button');
 const titleInput = document.querySelector('#title');
@@ -346,7 +331,7 @@ submitButton.addEventListener('click', function (e) {
 		return;
 	}
 	if (!category) {
-		errorMessage.innerHTML = '*Catégori obligatoire*';
+		errorMessage.innerHTML = '*Catégorie obligatoire*';
 	}
 
 	const formData = new FormData();
