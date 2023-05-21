@@ -49,11 +49,12 @@ function duplicatePortfolio(works) {
 		}
 	});
 }
-// boutons open & close de la modale
+
 const closeBtn = document.querySelectorAll('.close-modal');
 let modal = null;
 const jsModal = document.querySelector('.js-stop-modal');
 
+// bouton ouverture de la modale
 const openModal = function (e) {
 	e.preventDefault();
 	const target = document.getElementById('modal1');
@@ -67,6 +68,7 @@ const openModal = function (e) {
 		a.addEventListener('click', closeModal);
 	});
 };
+// bouton fermeture de la modale
 const closeModal = function (e) {
 	e.preventDefault();
 	if (modal === null) return;
@@ -80,6 +82,7 @@ const closeModal = function (e) {
 	});
 	modal = null;
 };
+// annule la fermeture de la modale au clic à l'intérieur d'elle
 const stopPropagation = function (e) {
 	e.stopPropagation();
 };
@@ -93,6 +96,7 @@ const modalGallery = document.querySelector('.modal-gallery');
 let editMode = false;
 const modale = document.getElementById('modal1');
 
+// supprimer une image
 function trash(event) {
 	const figure = document.querySelector('.figure-image');
 	let id = event.target.parentElement.getAttribute('data-id');
@@ -127,9 +131,10 @@ function trash(event) {
 			console.error('Il y a une erreur:', error);
 		});
 }
-
+// éditer une image
 function editImage() {
 	let figure = document.querySelectorAll('.figure-image');
+	// création des boutons d'édition de l'image
 	const editButton = document.createElement('div');
 	editButton.innerHTML = 'éditer';
 	editButton.classList.add('btn-edit');
@@ -148,7 +153,7 @@ function editImage() {
 		});
 	}
 	createBtn(figure);
-
+	// events sur les boutons
 	editButton.addEventListener('click', function () {
 		editMode = !editMode;
 		if (editMode) {
@@ -166,7 +171,7 @@ function editImage() {
 		trash(event);
 	});
 }
-
+// afficher les images dans la modale
 function showGalleryOnModal(works) {
 	works.forEach((work) => {
 		let img = document.createElement('img');
@@ -190,17 +195,17 @@ duplicateWorks().then((works) => {
 	duplicatePortfolio(works);
 });
 
-/* boutton supprimer la galerie */
 const deleteGalleryBtn = document.querySelector('.delete-gallery');
 const id = document.querySelector('.container1').getAttribute('data-id');
 
+// fenetre de confirmation pour la suppression de la galerie
 function confirmer() {
 	const dialog = confirm('Voulez-vous vraiment supprimer la gallerie ?');
 	if (dialog) {
 		deleteAll();
 	}
 }
-
+// supprimer la gallerie
 function deleteAll() {
 	const figure = document.querySelectorAll('.figure-image');
 	figure.forEach((figure) => {
@@ -231,7 +236,7 @@ function deleteAll() {
 		duplicatePortfolio(works);
 	});
 }
-
+// event sur le bouton supprimer la galerie
 deleteGalleryBtn.addEventListener('click', function () {
 	confirmer();
 });
@@ -242,12 +247,14 @@ const modalWrapper = document.querySelector('.modal-wrapper');
 const modalForm = document.querySelector('.modal-form');
 const returnBtn = document.querySelector('.return-btn');
 
+// bouton ajouter une photo à la galerie (page suivante)
 const addPhoto = function (e) {
 	e.preventDefault();
 	modalWrapper.style.display = 'none';
 	modalForm.style.display = null;
 	returnBtn.addEventListener('click', returnModal);
 };
+// bouton retour à la galerie
 const returnModal = function (e) {
 	e.preventDefault();
 	modalWrapper.style.display = null;
@@ -270,7 +277,7 @@ async function categories() {
 }
 categories();
 
-// bouton Ajouter une photo
+// bouton Ajouter une photo du formulaire
 const bcg = document.querySelector('.background');
 const bcgImg = document.querySelector('.background-img');
 const img = document.createElement('img');
@@ -321,7 +328,7 @@ submitButton.addEventListener('click', function (e) {
 	const title = titleInput.value;
 	const category = categorySelect.value;
 	console.log(image);
-
+	// conditions d'acceptation de l'image
 	if (!image) {
 		errorMessage.innerHTML = '*Image obligatoire*';
 		return;
@@ -333,7 +340,7 @@ submitButton.addEventListener('click', function (e) {
 	if (!category) {
 		errorMessage.innerHTML = '*Catégorie obligatoire*';
 	}
-
+	// récupération des éléments du formulaire
 	const formData = new FormData();
 	formData.append('title', title);
 	formData.append('category', category);
