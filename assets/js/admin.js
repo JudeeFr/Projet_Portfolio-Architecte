@@ -1,10 +1,12 @@
-// bouton Logout
-const logout = document.querySelector('.logout');
 let token = window.sessionStorage.getItem('token') || '';
 
+// bouton logout
+const logout = document.querySelector('.logout');
+
 logout.addEventListener('click', () => {
-	window.sessionStorage.removeItem('token', token);
-	window.location.replace('index.html');
+	window.sessionStorage.removeItem('userInformation');
+	window.sessionStorage.removeItem('token');
+	window.location.replace('./index.html');
 });
 
 /* Dupliquer l'appel API de works sur la page admin */
